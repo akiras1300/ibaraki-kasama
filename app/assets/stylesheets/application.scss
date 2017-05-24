@@ -12,5 +12,6 @@
  *
  *= require_tree ./common
  *= require_self
- *= require ./common/foundation_and_overrides
  */
+
+ @import "bootstrap";

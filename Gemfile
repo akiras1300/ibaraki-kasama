@@ -5,7 +5,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>= 1.3.3'
+end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.1'
 # Use sqlite3 as the database for Active Record
@@ -25,6 +27,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
+gem 'jquery-rails'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
@@ -33,8 +36,12 @@ gem 'jbuilder', '~> 2.5'
 gem 'activeadmin', github: 'activeadmin'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 gem 'devise' # if you need
-gem 'foundation-rails'
-gem 'foundation-icons-sass-rails'
+#gem 'foundation-rails'
+#gem 'foundation-icons-sass-rails'
+gem 'bootstrap', '~> 4.0.0.alpha4'
+#gem 'therubyracer', platforms: :ruby
+#gem 'less-rails'
+#gem 'twitter-bootstrap-rails'
 gem 'simple_form'
 
 # Use Capistrano for deployment
