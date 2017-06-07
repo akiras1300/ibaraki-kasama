@@ -36,6 +36,7 @@ gem 'jquery-rails'
 gem 'activeadmin', github: 'activeadmin'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 gem 'devise' # if you need
+gem 'feedjira'
 #gem 'foundation-rails'
 #gem 'foundation-icons-sass-rails'
 gem 'bootstrap', '~> 4.0.0.alpha4'
