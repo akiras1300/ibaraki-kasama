@@ -16,7 +16,7 @@
     <% @feeds.each do |feed| %>
       <tr>
         <td><%= feed.name %></td>
-        <td><%= feed.url %></td>
+        <td><%= feed.rss %></td>
         <td><%= feed.description %></td>
         <td><%= link_to 'Show', feed %></td>
         <td><%= link_to 'Edit', edit_feed_path(feed) %></td>

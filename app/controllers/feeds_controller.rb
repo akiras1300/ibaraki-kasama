@@ -5,6 +5,6 @@ class FeedsController < InheritedResources::Base
   end
   private
     def feed_params
-      params.require(:feed).permit(:name, :url, :description)
+      params.require(:feed).permit(:name, :rss, :description)
     end
 end

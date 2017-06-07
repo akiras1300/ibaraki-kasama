@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170607115533) do
+ActiveRecord::Schema.define(version: 20170607133816) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -78,10 +78,12 @@ ActiveRecord::Schema.define(version: 20170607115533) do
 
   create_table "feeds", force: :cascade do |t|
     t.string "name"
-    t.string "url"
+    t.string "rss"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "url_id"
+    t.index ["url_id"], name: "index_feeds_on_url_id"
   end
 
   create_table "urls", force: :cascade do |t|
@@ -89,6 +91,8 @@ ActiveRecord::Schema.define(version: 20170607115533) do
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "feed_id"
+    t.index ["feed_id"], name: "index_urls_on_feed_id"
   end
 
 end

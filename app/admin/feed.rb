@@ -1,5 +1,5 @@
 ActiveAdmin.register Feed do
-  permit_params :url, :name
+  permit_params :rss, :name,:url_id
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
