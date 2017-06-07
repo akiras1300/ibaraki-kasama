@@ -10,4 +10,17 @@ namespace :sync do
       p "Synced Feed - #{feed.name}"
     end
   end
+  task urls: [:environment] do
+    Url.all.each do |url|
+      feed_url = Feedbag.find( url.url )
+      feedAry = feed_url.split(",")
+      unless feedAry[0].empty?
+        feed_url =feedAry[0].join()
+        local_feed = Feed.where(url: feed_url).first_or_initialize
+        local_feed.update_attributes(url: feed_url, name: url.title)
+        p "Synced Feed - #{feed_url}"
+      end
+      p "Synced Url - #{url.title}"
+    end
+  end
 end

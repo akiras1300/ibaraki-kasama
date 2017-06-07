@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'urls/index'
+
+  get 'urls/show'
+
   root 'pages#index'
 
   get 'pages/show'
