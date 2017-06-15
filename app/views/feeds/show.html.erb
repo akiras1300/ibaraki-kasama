@@ -18,9 +18,12 @@
 <%= link_to 'Edit', edit_feed_path(@feed) %> |
 <%= link_to 'Back', feeds_path %>
 <%= paginate @entry %>
-<ul>
-<% @entry.each do |r| %>
-  <li><%= r.title %></li>
-<% end %>
-</ul>
+    <div id="wrapper">
+      <div id="masonry-container">
+        <% @entry.each do |r| %>
+          <div class="mas-box"><%= image_tag r.image.mid.url if r.image?  %><%= r.title %></div>
+        <% end %>
+      </div>
+    </div>
+
 <%= paginate @entry %>

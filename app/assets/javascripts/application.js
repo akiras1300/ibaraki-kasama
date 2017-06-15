@@ -13,7 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require tether
+//= require tag-it.min
 //= require rails-ujs
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require_tree ./lib
 //= require_tree ./common

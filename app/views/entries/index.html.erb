@@ -1,9 +1,19 @@
-<div class="container">
-  <% @entries.each do |entry| %>
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <%= link_to entry.title, entry %> - <i> published <%= time_ago_in_words(entry.published) %> ago.</i>
+<%= paginate @entry %>
+    <div id="wrapper">
+      <div id="masonry-container">
+        <% @entry.each do |r| %>
+        <%= link_to("entries/show/#{r.id}") do %>
+          <div class="mas-box">
+          <%= image_tag r.image.mid.url if r.image?  %>
+          <%= r.title %>
+          <div class="row entryitem">
+            <div class="col"><%= time_ago_in_words(r.published)+"前" %></div>
+            <div class="col right"><%= if r.author.present? then r.author elsif r.feed.name.present? then r.feed.name  end %></div>
+          </div>
+        </div>
+        <% end %>
+        <% end %>
       </div>
     </div>
-  <% end %>
-</div>
+
+<%= paginate @entry %>

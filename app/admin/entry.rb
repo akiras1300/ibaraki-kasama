@@ -11,5 +11,16 @@ ActiveAdmin.register Entry do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-  permit_params :title, :author
+  permit_params :title, :author,:image,:published
+form(:html => { :multipart => true }) do |f|
+   f.inputs "Details" do
+     f.input :title
+      f.input :author
+     f.input :image
+     f.input :tag
+     f.input :published, as: :just_datetime_picker
+     f.input :image_cache, as: :hidden
+   end
+   f.actions
+ end
 end
