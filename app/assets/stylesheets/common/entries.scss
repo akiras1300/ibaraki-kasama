@@ -1,11 +1,22 @@
 // Place all the styles related to the entries controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
+a:hover{
+  text-decoration: none;
+  img{
+      opacity: 0.5 ;
+  }
+}
 .entryitem{
   color:#aaa;
   font-size: 11px;
   .right{
     text-align: right;
   }
+}
+.abs{
+  position: absolute;
+}
+.pdr10{
+  padding-right: 10px;
 }

@@ -6,5 +6,12 @@ class EntriesController < ApplicationController
 
   def show
     @entry = Entry.find(params[:id])
+    @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
   end
+
+  def update
+    render :text => params
+    params[:entry][:tag_list]
+  end
+
 end

@@ -19,7 +19,8 @@
  *= require 'masonry/infinitescroll'
  *= require 'masonry/right-to-left'
  *= require 'masonry/transitions'
- *= require jquery.tagit
-*= require tagit.ui-zendesk
+  *= require 'jquery.tagit'
+  *= require 'jquery-ui'
+  *= require 'tagit.ui-zendesk'
  */
 @import "bootstrap";

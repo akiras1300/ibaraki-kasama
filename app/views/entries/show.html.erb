@@ -2,7 +2,8 @@
 <div class="container">
   <h3><%= link_to @entry.title, @entry.url %></h3>
   <i>published on <%= @entry.published %> by <%= @entry.author %></i>
+  <p><%= @entry.tag_list;%></p>
   <p>
-    <%= @entry.content %>
-  </p>
+<%= image_tag @entry.image.url, :class => "rounded float-left pdr10" if @entry.image?  %>
+    <%= @entry.content%></p>
 </div>

@@ -60,6 +60,19 @@ namespace :sync do
     end
   end
 
+  task tagset: [:environment] do
+    Tag.all.each do |tag|
+      @ens = Entry.where("content like ? OR title like ?" ,"%" + tag.name + "%", "%" + tag.name + "%",)
+      unless @ens[0].blank?
+        @ens.each do |entry|
+          entry.tag_list.add(tag.name)
+          p entry.title
+          entry.save
+        end
+      end
+    end
+  end
+
   task urls: [:environment] do
     Url.all.each do |url|
       feed_url = Feedbag.find( url.url )

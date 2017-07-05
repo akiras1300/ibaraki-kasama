@@ -1,0 +1,13 @@
+<%= paginate @tag %>
+    <div id="wrapper">
+      <div id="masonry-container">
+        <% @tag.each do |r| %>
+          <%= link_to("show/#{r.id}") do %>
+            <div class="mas-box">
+              <%= "#{r.name}(#{r.taggings_count})" %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+<%= paginate @tag %>

@@ -12,6 +12,9 @@
 @import "just_datetime_picker/base";
 @import "active_admin/mixins";
 @import "active_admin/base";
+@import 'jquery.tagit';
+@import 'jquery-ui';
+@import 'tagit.ui-zendesk';
 
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:
