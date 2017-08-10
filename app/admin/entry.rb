@@ -10,7 +10,8 @@ ActiveAdmin.register Entry do
        f.label :tag_list, "タグ"
        f.text_field :tag_list, value: entry.tag_list.join(",")
         f.input :content
-       f.input :published, as: :just_datetime_picker
+       f.label :published, "編集日"
+       f.text_field :published, class: 'datepic'
        f.input :image_cache, as: :hidden
        panel 'Markup' do
           ul :id => "alltag" do

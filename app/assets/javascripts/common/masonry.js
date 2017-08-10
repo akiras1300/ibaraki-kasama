@@ -10,7 +10,7 @@ $container.imagesLoaded(function(){
 	  });
     $('.mas-box').hide();
     $('.mas-box').each(function(index) {
-      $(this).delay(index * 50).css({display:'block',opacity:'0'}).animate({opacity:'1'},500);
+      $(this).delay(index * 25).css({display:'block',opacity:'0'}).animate({opacity:'1'},500);
     });
     });
     });

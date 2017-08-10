@@ -1,6 +1,6 @@
 class TagsController < ApplicationController
   def index
-    @tag = Tag.page(params[:page]).order('taggings_count desc')
+    @tag = Tag.page(params[:page]).order('taggings_count desc').per(50)
   end
 
   def show

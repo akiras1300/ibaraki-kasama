@@ -1,4 +1,7 @@
-  <h3><%= p @tag.name %></h3>
+<%= provide(:title,"#{@tag.name}の記事一覧") %>
+<div class="txc">
+<h3><%= p @tag.name %>の記事一覧</h3>
+</div>
   <%= paginate @entry %>
   <div id="wrapper">
     <div id="masonry-container">

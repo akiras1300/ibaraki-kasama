@@ -1,5 +1,12 @@
-<%= paginate @entry %>
+
     <div id="wrapper">
+      <div class="txc">
+      <h1>カサリサ</h1>
+      <p>
+        カサリサ（カサマリサーチ）は、笠間に関する記事を収集する個人運営サイトです。
+      </p>
+    </div>
+      <%= paginate @entry %>
       <div id="masonry-container">
           <% @entry.each do |r| %>
             <div class="mas-box">
@@ -23,5 +30,5 @@
             </div>
           <% end %>
       </div>
+      <%= paginate @entry %>
     </div>
-<%= paginate @entry %>
