@@ -9,9 +9,5 @@ class EntriesController < ApplicationController
     @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
   end
 
-  def update
-    render :text => params
-    params[:entry][:tag_list]
-  end
 
 end

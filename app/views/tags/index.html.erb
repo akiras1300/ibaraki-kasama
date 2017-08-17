@@ -2,11 +2,13 @@
     <div id="wrapper">
       <div id="masonry-container">
         <% @tag.each do |r| %>
-          <%= link_to("show/#{r.id}") do %>
             <div class="mas-box">
+              <%= link_to("show/#{r.id}") do %>
+              <div class="bbox">
               <%= "#{r.name}(#{r.taggings_count})" %>
+              </div>
+              <% end %>
             </div>
-          <% end %>
         <% end %>
       </div>
     </div>

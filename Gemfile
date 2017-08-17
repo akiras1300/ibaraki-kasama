@@ -41,14 +41,14 @@ gem 'mini_magick'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 # ActiveAdmin
-gem 'activeadmin', github: 'activeadmin'
+gem 'activeadmin', '~> 1.0.0.pre1'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 gem 'devise' # if you need
 gem 'feedjira'
 gem 'feedbag'
 #gem 'foundation-rails'
 #gem 'foundation-icons-sass-rails'
-gem 'bootstrap', '~> 4.0.0.alpha4'
+gem 'bootstrap', '~> 4.0.0.beta'
 #gem 'therubyracer', platforms: :ruby
 #gem 'less-rails'
 #gem 'twitter-bootstrap-rails'

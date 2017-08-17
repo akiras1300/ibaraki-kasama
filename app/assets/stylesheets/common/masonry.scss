@@ -14,27 +14,34 @@
       margin:10px;
       width: 320px;
       opacity:0;
+      a{
+        color: #667;
+      }
+      a:hover{
+        color:#000;
+      }
       .bbox{
         padding: 8px;
         border: 1px solid #eee;
         background-color: #ffffff;
         border-radius: 5px;
-        color: #667;
       }
       .tags{
         padding:0 8px;
         width: 320px;
       }
     }
-    a{
-      color: #667;
-      font-size: 14px;
-    }
-    a:hover{
-        .bbox{
-          background-color: #fafafa;
-      }
-      color: #000;
+    .tags{
+        a{
+            color: #667;
+            font-size: 14px;
+          }
+          a:hover{
+              .bbox{
+                background-color: #fafafa;
+            }
+            color: #000;
+          }
     }
 
     .mas-box.x2 {

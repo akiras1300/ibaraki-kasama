@@ -6,5 +6,6 @@
 # db      => "2014-10-01 00:00:00"
 
 # カスタムフォーマットを定義
-Time::DATE_FORMATS[:published_on] = "%Y年%m月%d日 %H時%M分"
+Time::DATE_FORMATS[:published] = "%Y.%m.%d"
+Time::DATE_FORMATS[:published_jp] = "%Y年%m月%d日 %H時%M分"
 Date::DATE_FORMATS[:default]      = "%Y年%m月d日"

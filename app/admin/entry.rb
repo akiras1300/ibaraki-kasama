@@ -1,5 +1,5 @@
 ActiveAdmin.register Entry do
-  permit_params :title, :author,:image,:published
+  permit_params :title, :author,:image,:published,:content,:tag_list,:published
 
   form(:html => { :multipart => true }) do |f|
     all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name);
@@ -20,12 +20,6 @@ ActiveAdmin.register Entry do
        end
      end
    f.actions
-  end
-
-  before_update do
-    entry = Entry.find(params[:id])
-    entry.tag_list = params[:entry][:tag_list]
-    entry.save
   end
 
   show do

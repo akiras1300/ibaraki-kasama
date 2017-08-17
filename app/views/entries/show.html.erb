@@ -1,9 +1,16 @@
 <div class="container">
   <%= provide(:title, "#{@entry.title}by#{@entry.author}") %>
-  <h1><%= link_to @entry.title, @entry.url %></h1>
-  <i>投稿日：<%= @entry.published.to_s(:published_on) %> by <%= @entry.author %></i>
-  <p><%= @entry.tag_list;%></p>
-  <p>
-<%= image_tag @entry.image.url, :class => "rounded float-left pdr10" if @entry.image?  %>
+  <h1><%= @entry.title %></h1>
+  <div  class="stags">
+    <% @entry.tags.each do |tag| %>
+      <%= link_to("/tags/show/#{tag.id}", class: "btn btn-primary btn-sm") do%>
+      <%= p tag.name %>
+      <% end %>
+    <% end %>
+  </div>
+    <p>
+    <i><%= @entry.published.to_s(:published) %> by <%= @entry.author %></i>
+  </p>
+<%= image_tag @entry.image.url, :class => "rounded float-left pdr10 eimg" if @entry.image?  %>
     <%= @entry.content%></p>
 </div>
