@@ -9,8 +9,16 @@
     <% end %>
   </div>
     <p>
-    <i><%= @entry.published.to_s(:published) %> by <%= @entry.author %></i>
+    <i><%= @entry.published.to_s(:published) %> by
+      <%= link_to("/feeds/#{@entry.feed.id}") do%>
+      <%= p @entry.author %>
+      <% end %>
+    </i>
   </p>
-<%= image_tag @entry.image.url, :class => "rounded float-left pdr10 eimg" if @entry.image?  %>
-    <%= @entry.content%></p>
+<%= image_tag @entry.image.url, :class => "float-left pdr10 eimg" if @entry.image?  %>
+    <%= @entry.content %></p>
+    <%= link_to("#{@entry.url}",:target=>"_blank") do%>
+    <div class="clear"></div>
+    <span type="button" class="btn btn-primary btn-lg btn-block mg10">掲載元で続きを読む</span>
+    <% end %>
 </div>

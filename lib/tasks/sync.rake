@@ -27,7 +27,7 @@ namespace :sync do
 
   task imgset: [:environment] do
     Entry.all.each do |entry|
-      if entry.check.blank?
+      if entry.check.blank? && !(entry.feed.id==8)
         entry.check =1
         entry.save
         p entry.title
@@ -47,7 +47,7 @@ namespace :sync do
                   imagesise=FastImage.size(url)
                   unless imagesise.blank?
                     unless url=="http://119.245.141.208/image/blog_t.jpg"
-                      if imagesise[0] >= 150 && imagesise[1] >= 150
+                      if imagesise[0] > 200 && imagesise[1] > 200
                         entry.remote_image_url =url
                         entry.save
                         p url
@@ -63,7 +63,7 @@ namespace :sync do
 
   task tagset: [:environment] do
     Tag.all.each do |tag|
-      @ens = Entry.where("content like ? OR title like ?" ,"%" + tag.name + "%", "%" + tag.name + "%",)
+      @ens = Entry.where("replace(replace(content,' ',''),'　','') like ? OR title like ?" ,"%" + tag.name + "%", "%" + tag.name + "%",)
       unless @ens[0].blank?
         @ens.each do |entry|
           entry.tag_list.add(tag.name)

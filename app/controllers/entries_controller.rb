@@ -6,6 +6,9 @@ class EntriesController < ApplicationController
 
   def show
     @entry = Entry.find(params[:id])
+    if @entry.content.blank?
+      @entry.content="この記事の内容は掲載元にてご覧ください"
+    end
     @all_tag_list = ActsAsTaggableOn::Tag.all.pluck(:name)
   end
 

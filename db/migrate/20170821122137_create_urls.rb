@@ -3,7 +3,6 @@ class CreateUrls < ActiveRecord::Migration[5.1]
     create_table :urls do |t|
       t.string :url
       t.string :title
-
       t.timestamps
     end
   end
