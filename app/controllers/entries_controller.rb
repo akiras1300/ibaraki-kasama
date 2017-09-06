@@ -1,7 +1,12 @@
 class EntriesController < ApplicationController
 
   def index
-    @entry = Entry.page(params[:page]).order('published desc')
+    if params[:key].present?
+      @entry = Entry.where("replace(replace(content,' ',''),'　','') like ? OR title like ?" ,"%" + params[:key] + "%", "%" + params[:key] + "%",).page(params[:page]).order('published desc')
+      @key= params[:key];
+    else
+      @entry = Entry.page(params[:page]).order('published desc')
+    end
   end
 
   def show

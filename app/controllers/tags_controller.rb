@@ -5,7 +5,7 @@ class TagsController < ApplicationController
 
   def show
     @tag = Tag.find(params[:id])
-    @entry = Entry.page.tagged_with(@tag.name)
+    @entry = Entry.page.tagged_with(@tag.name).order('published desc')
   end
 
 end

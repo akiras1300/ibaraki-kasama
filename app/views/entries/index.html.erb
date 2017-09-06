@@ -1,10 +1,16 @@
 
     <div id="wrapper">
       <div class="txc">
+      <% if @key.present? %>
+      <h1 class="h5">
+          <%= "検索結果：#{@key} (#{@entry.total_count}件）" %>
+      </h1>
+      <% else %>
       <h1>カサリサ</h1>
       <p>
         カサリサ（カサマリサーチ）は、笠間に関する記事を収集する個人運営サイトです。
       </p>
+      <% end %>
     </div>
       <%= paginate @entry %>
       <div id="masonry-container">

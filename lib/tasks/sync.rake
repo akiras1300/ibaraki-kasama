@@ -3,12 +3,15 @@ namespace :sync do
   task feeds: [:environment] do
     Feedjira.logger.level = Logger::FATAL
     Feed.all.each do |feed|
-      content = Feedjira::Feed.fetch_and_parse feed.rss
+      begin
+        content = Feedjira::Feed.fetch_and_parse feed.rss
       content.entries.each do |entry|
-       entry.summary=truncate(ActionController::Base.helpers.strip_tags(entry.summary), length: 1000)
+       entry.summary=truncate(Sanitize.clean(entry.summary), length: 1000)
        local_entry = feed.entries.where(title: entry.title).first_or_initialize
        local_entry.update_attributes(content: entry.summary, author: feed.name, url: entry.url, published: entry.published)
         p "Synced Entry - #{entry.title} #{entry.published}"
+      end
+      rescue => e
       end
       p "Synced Feed - #{feed.name}"
     end

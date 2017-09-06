@@ -16,7 +16,7 @@
     </i>
   </p>
 <%= image_tag @entry.image.url, :class => "float-left pdr10 eimg" if @entry.image?  %>
-    <%= @entry.content %></p>
+    <%= simple_format(@entry.content) %></p>
     <%= link_to("#{@entry.url}",:target=>"_blank") do%>
     <div class="clear"></div>
     <span type="button" class="btn btn-primary btn-lg btn-block mg10">掲載元で続きを読む</span>
