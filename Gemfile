@@ -23,6 +23,7 @@ gem 'masonry-rails'
 gem 'fastimage'
 gem 'gretel'
 gem 'acts-as-taggable-on'
+gem 'impressionist', git: 'https://github.com/charlotte-ruby/impressionist.git'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 gem "just-datetime-picker"

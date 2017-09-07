@@ -2,6 +2,7 @@
 <div class="txc">
 <h3><%= p @tag.name %>の記事一覧</h3>
 <%= "(#{@entry.total_count}件)" %>
+  <%= number_with_delimiter(@page_views) %>
 </div>
   <%= paginate @entry %>
   <div id="wrapper">

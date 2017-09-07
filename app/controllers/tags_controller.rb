@@ -5,6 +5,8 @@ class TagsController < ApplicationController
 
   def show
     @tag = Tag.find(params[:id])
+    impressionist(@tag, nil, :unique => [:session_hash])
+    @page_views = @tag.impressionist_count
     @entry = Entry.page.tagged_with(@tag.name).order('published desc')
   end
 

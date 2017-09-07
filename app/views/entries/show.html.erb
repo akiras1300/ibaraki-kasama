@@ -1,6 +1,7 @@
 <div class="container">
   <%= provide(:title, "#{@entry.title}by#{@entry.author}") %>
   <h1><%= @entry.title %></h1>
+  <%= number_with_delimiter(@page_views) %>
   <div  class="stags">
     <% @entry.tags.each do |tag| %>
       <%= link_to("/tags/show/#{tag.id}", class: "btn btn-primary btn-sm") do%>
@@ -22,3 +23,26 @@
     <span type="button" class="btn btn-primary btn-lg btn-block mg10">掲載元で続きを読む</span>
     <% end %>
 </div>
+<div id="masonry-container">
+    <% @entries.each do |r| %>
+      <div class="mas-box">
+        <%= link_to("/entries/show/#{r.id}") do %>
+          <div class="bbox">
+            <%= image_tag r.image.mid.url if r.image?  %>
+            <%= r.title %>
+            <div class="row entryitem">
+              <div class="col"><%= time_ago_in_words(r.published)+"前" %></div>
+              <div class="col right"><%= if r.author.present? then r.author elsif r.feed.present? then r.feed.name  end %></div>
+            </div>
+          </div>
+        <% end %>
+        <div  class="tags">
+          <% r.tags.each do |tag| %>
+            <%= link_to("/tags/show/#{tag.id}") do%>
+            <%= p tag.name %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    </div>
