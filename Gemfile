@@ -22,6 +22,9 @@ gem 'uglifier', '>= 1.3.0'
 gem 'masonry-rails'
 gem 'fastimage'
 gem 'gretel'
+gem 'google_places'
+gem "gmaps4rails"
+gem "geocoder"
 gem 'acts-as-taggable-on'
 gem 'impressionist', git: 'https://github.com/charlotte-ruby/impressionist.git'
 # See https://github.com/rails/execjs#readme for more supported runtimes
@@ -38,6 +41,7 @@ gem 'jquery-ui-rails'
 gem 'carrierwave'
 #gem 'rmagick'
 gem 'mini_magick'
+gem 'geocoder'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password

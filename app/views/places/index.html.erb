@@ -1,0 +1,28 @@
+<div style='width: 100%;'>
+  <div id="map" style='width: 100%; height: 400px;'></div>
+</div>
+<%= paginate @places %>
+    <div id="wrapper">
+      <div id="masonry-container">
+        <% @places.each_with_index do |r,index| %>
+            <div class="mas-box">
+              <%= link_to("/tags/show/#{r.tag.id}") do %>
+              <div class="bbox">
+              <%= "#{index+1}:#{r.tag.name}" %>
+              <%= image_tag r.tag.image.url if r.tag.image?  %>
+              </div>
+              <% end %>
+            </div>
+        <% end %>
+      </div>
+    </div>
+<%= paginate @places %>
+
+<script type="text/javascript">
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+      markers = handler.addMarkers(<%=raw @hash.to_json %>);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+    });
+</script>

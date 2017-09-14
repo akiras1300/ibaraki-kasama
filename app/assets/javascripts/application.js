@@ -22,3 +22,4 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require_tree ./common
+//= require gmaps/google

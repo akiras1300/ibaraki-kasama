@@ -66,12 +66,58 @@ namespace :sync do
 
   task tagset: [:environment] do
     Tag.all.each do |tag|
-      @ens = Entry.where("replace(replace(content,' ',''),'　','') like ? OR title like ?" ,"%" + tag.name + "%", "%" + tag.name + "%",)
+      name2=tag.name
+      if tag.oya.present?
+        record = Tag.where(id: tag.oya).first
+        if record.present?
+          name2=record.name
+        end
+      end
+      @ens = Entry.where("replace(replace(content,' ',''),'　','') like ? OR title like ?" ,"%" + tag.name + "%", "%" + tag.name + "%",).order('published desc').limit(100)
       unless @ens[0].blank?
         @ens.each do |entry|
-          entry.tag_list.add(tag.name)
+          entry.tag_list.add(name2)
           p entry.title
           entry.save
+        end
+      end
+    end
+  end
+
+  task spotset: [:environment] do
+    seeds_dir  = "#{Rails.root}/db/seeds"
+    csv_files = Dir.entries(seeds_dir).select {|f| f =~ /\.csv$/ }
+    csv_files.each do |csv_file|
+    p "#{csv_file} from csv"
+    #model_name = File.basename(csv_file, '.csv')
+    #model      = model_name.classify.constantize
+    path = "#{seeds_dir}/#{csv_file}"
+    p path
+    csv  = CSV.read(path, headers: true)
+      csv.each do |row|
+        p row
+        # idが重複するレコードがある場合はupdate
+        if row.has_key?('name')
+          record = Tag.where(name: row['name']).first
+            if record.blank?
+              record =Tag.create(name: row['name'],tagtype_id:1)
+            end
+            p record.name
+            if record.place.present?
+              record.place.update(lat:row['lat'],lng:row['lng'])
+            end
+        end
+      end
+    end
+  end
+  task placeset: [:environment] do
+    @client = GooglePlaces::Client.new('AIzaSyB8eobPH6dNgK-AuwOEoD1ctLmQRvN1Aas')
+    Place.all.each do |place|
+      if place.pid.blank?
+        places=@client.spots( place.lat,place.lng, :name => place.tag.name, :radius => 10, :language => 'ja')
+        if places.present?
+            p places.first.name
+            place.update(pid:places.first.place_id,adress:places.first.vicinity,tel:places.first.formatted_phone_number,rate:places.first.rating,ptype:places.first.types.join(','))
         end
       end
     end

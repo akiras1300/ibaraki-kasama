@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170906102104) do
+ActiveRecord::Schema.define(version: 20170914095607) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -101,6 +101,22 @@ ActiveRecord::Schema.define(version: 20170906102104) do
     t.index ["user_id"], name: "index_impressions_on_user_id"
   end
 
+  create_table "places", force: :cascade do |t|
+    t.string "adress"
+    t.string "tel"
+    t.string "open"
+    t.float "lat"
+    t.float "lng"
+    t.float "rate"
+    t.string "parking"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "tag_id"
+    t.string "ptype"
+    t.string "pid"
+    t.index ["tag_id"], name: "index_places_on_tag_id"
+  end
+
   create_table "taggings", force: :cascade do |t|
     t.integer "tag_id"
     t.string "taggable_type"
@@ -124,8 +140,22 @@ ActiveRecord::Schema.define(version: 20170906102104) do
     t.string "name"
     t.integer "taggings_count", default: 0
     t.integer "event_id"
+    t.string "read"
+    t.text "body"
+    t.integer "oya"
+    t.integer "place_id"
+    t.integer "tagtype_id"
+    t.text "image"
     t.index ["event_id"], name: "index_tags_on_event_id"
     t.index ["name"], name: "index_tags_on_name", unique: true
+    t.index ["place_id"], name: "index_tags_on_place_id"
+    t.index ["tagtype_id"], name: "index_tags_on_tagtype_id"
+  end
+
+  create_table "tagtypes", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "urls", force: :cascade do |t|

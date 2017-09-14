@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get 'tagtypes/index'
+
+  get 'tagtypes/show'
+
+  get 'places/index'
+
+  get 'places/show'
+
   get 'tags/index'
 
   get 'tags/show/:id' => 'tags#show'
