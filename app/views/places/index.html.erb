@@ -10,6 +10,9 @@
               <div class="bbox">
               <%= "#{index+1}:#{r.tag.name}" %>
               <%= image_tag r.tag.image.url if r.tag.image?  %>
+              <div class="sg">
+                <%= r.adress %>
+              </div>
               </div>
               <% end %>
             </div>

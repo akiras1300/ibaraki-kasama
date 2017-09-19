@@ -22,9 +22,11 @@ gem 'uglifier', '>= 1.3.0'
 gem 'masonry-rails'
 gem 'fastimage'
 gem 'gretel'
+gem 'gon'
 gem 'google_places'
 gem "gmaps4rails"
 gem "geocoder"
+#gem 'jquery-turbolinks'
 gem 'acts-as-taggable-on'
 gem 'impressionist', git: 'https://github.com/charlotte-ruby/impressionist.git'
 # See https://github.com/rails/execjs#readme for more supported runtimes

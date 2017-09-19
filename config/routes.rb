@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'imgs/index'
+
+  get 'imgs/show/:id' => 'imgs#show'
+
   get 'tagtypes/index'
 
   get 'tagtypes/show'

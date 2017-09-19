@@ -18,4 +18,10 @@ $(document).on 'ready page:load', ->
     $('#entry_tag_list').tagit
       singleField: true,
       availableTags: tagary
+    $('#img_tag_list').tagit
+      singleField: true,
+      availableTags: tagary
+    $('#tag_tag_list').tagit
+      singleField: true,
+      availableTags: tagary
 #= require just_datetime_pic""ker/nested_form_workaround

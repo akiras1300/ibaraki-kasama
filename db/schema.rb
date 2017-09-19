@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170914095607) do
+ActiveRecord::Schema.define(version: 20170916111432) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -73,6 +73,25 @@ ActiveRecord::Schema.define(version: 20170914095607) do
     t.datetime "updated_at", null: false
     t.integer "url_id"
     t.index ["url_id"], name: "index_feeds_on_url_id"
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.integer "from_tag_id", null: false
+    t.integer "to_tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["from_tag_id", "to_tag_id"], name: "index_follows_on_from_tag_id_and_to_tag_id", unique: true
+    t.index ["from_tag_id"], name: "index_follows_on_from_tag_id"
+    t.index ["to_tag_id"], name: "index_follows_on_to_tag_id"
+  end
+
+  create_table "imgs", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.text "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "inyo"
   end
 
   create_table "impressions", force: :cascade do |t|
@@ -146,6 +165,7 @@ ActiveRecord::Schema.define(version: 20170914095607) do
     t.integer "place_id"
     t.integer "tagtype_id"
     t.text "image"
+    t.string "inyo"
     t.index ["event_id"], name: "index_tags_on_event_id"
     t.index ["name"], name: "index_tags_on_name", unique: true
     t.index ["place_id"], name: "index_tags_on_place_id"

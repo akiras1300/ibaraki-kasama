@@ -1,6 +1,8 @@
 class EntriesController < ApplicationController
-
+  include MyUtility
   def index
+    gettlist
+    gon.tlist = @tlist
     if params[:key].present?
       @entry = Entry.where("replace(replace(content,' ',''),'　','') like ? OR title like ?" ,"%" + params[:key] + "%", "%" + params[:key] + "%",).page(params[:page]).order('published desc')
       @key= params[:key];
@@ -10,6 +12,8 @@ class EntriesController < ApplicationController
   end
 
   def show
+    gettlist
+    gon.tlist = @tlist
     @entry = Entry.find(params[:id])
     impressionist(@entry, nil, :unique => [:session_hash])
     @page_views = @entry.impressionist_count

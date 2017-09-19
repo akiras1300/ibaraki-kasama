@@ -1,0 +1,24 @@
+<%= paginate @img %>
+<div id="masonry-container">
+    <% @img.each do |r| %>
+      <div class="mas-box">
+        <%= link_to("/imgs/show/#{r.id}") do %>
+          <div class="bbox">
+            <%= image_tag r.image.mid.url if r.image?  %>
+            <%= r.title %>
+            <div class="row imgitem">
+              <div class="col"><%= time_ago_in_words(r.created_at)+"前" %></div>
+            </div>
+          </div>
+        <% end %>
+        <div  class="tags">
+          <% r.tags.each do |tag| %>
+            <%= link_to("/tags/show/#{tag.id}") do%>
+            <%= p tag.name %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+</div>
+<%= paginate @img %>

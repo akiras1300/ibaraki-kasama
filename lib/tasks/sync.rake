@@ -49,7 +49,7 @@ namespace :sync do
                   url = image.attributes["src"].value
                   imagesise=FastImage.size(url)
                   unless imagesise.blank?
-                    unless url=="http://119.245.141.208/image/blog_t.jpg"
+                    unless url=="http://119.245.141.208/image/blog_t.jpg" and url=="http://www.city.kasama.lg.jp/data/img/1504048809_33.jpg"
                       if imagesise[0] > 200 && imagesise[1] > 200
                         entry.remote_image_url =url
                         entry.save
@@ -95,16 +95,18 @@ namespace :sync do
     p path
     csv  = CSV.read(path, headers: true)
       csv.each do |row|
-        p row
+        #p row
         # idが重複するレコードがある場合はupdate
         if row.has_key?('name')
           record = Tag.where(name: row['name']).first
             if record.blank?
               record =Tag.create(name: row['name'],tagtype_id:1)
             end
-            p record.name
             if record.place.present?
               record.place.update(lat:row['lat'],lng:row['lng'])
+            else
+              p record.name
+              Place.create(lat:row['lat'],lng:row['lng'],tag_id:record.id)
             end
         end
       end

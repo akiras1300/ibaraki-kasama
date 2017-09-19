@@ -1,5 +1,8 @@
 class PlacesController < ApplicationController
+  include MyUtility
   def index
+    gettlist
+    gon.tlist = @tlist
     @places = Place.page(params[:page]).order('id desc')
     num=1
     @hash = Gmaps4rails.build_markers(@places) do |place, marker|

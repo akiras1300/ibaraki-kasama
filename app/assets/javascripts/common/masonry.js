@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function(){
+$(document).on('ready turbolinks:load', function(){
   var $container = $('#masonry-container');
 $container.imagesLoaded(function(){
 	$container.masonry({
