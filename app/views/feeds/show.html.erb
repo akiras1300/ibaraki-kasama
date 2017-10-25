@@ -11,10 +11,10 @@
   </div>
 </div>
 <%= paginate @entry %>
-<div id="masonry-container">
+<div class="masonry-container">
     <% @entry.each do |r| %>
       <div class="mas-box">
-        <%= link_to("/entries/show/#{r.id}") do %>
+        <%= link_to(entry_path(r)) do %>
           <div class="bbox">
             <%= image_tag r.image.mid.url if r.image?  %>
             <%= r.title %>
@@ -26,7 +26,7 @@
         <% end %>
         <div  class="tags">
           <% r.tags.each do |tag| %>
-            <%= link_to("/tags/show/#{tag.id}") do%>
+            <%= link_to(tag_path(tag)) do%>
             <%= p tag.name %>
             <% end %>
           <% end %>

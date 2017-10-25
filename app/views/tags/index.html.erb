@@ -1,13 +1,78 @@
+<div id="wrapper">
+  <div class="txc">
+    <% if @tagtype.present? %>
+      <h1 class="h2">
+          <%= "#{@tagtype.name} (#{@tag.total_count}件）" %>
+      </h1>
+    <% else %>
+      <h1 class="h2">タグ一覧</h1>
+      <% if !current_admin_user.nil? %>
+      <div><%= link_to "新規",new_tag_path %></div>
+      <% end %>
+    <% end %>
+    <div  class="stags mg10">
+      <%= link_to("/tags", class: "btn btn-primary btn-sm") do%>
+        <%= p "すべて" %>
+      <% end %>
+      <% @tagtypes.each do |tt| %>
+        <%= link_to("/tags?type=#{tt.id}", class: "btn btn-primary btn-sm") do%>
+        <%= p tt.name %>
+        <% end %>
+      <% end %>
+      <%= link_to("/tags?type=10", class: "btn btn-primary btn-sm") do%>
+        <%= p "その他" %>
+      <% end %>
+    </div>
+  </div>
+</div>
 <%= paginate @tag %>
     <div id="wrapper">
-      <div id="masonry-container">
+      <div class="masonry-container">
         <% @tag.each do |r| %>
             <div class="mas-box">
-              <%= link_to("show/#{r.id}") do %>
+              <%= link_to(tag_path(r)) do %>
               <div class="bbox">
               <%= "#{r.name}(#{r.taggings_count})" %>
+              <% if r.rates.present? %>
+                <div>
+                <%
+                avrate=r.rates.average(:rate).round(1)
+                avrate=avrate.round*2/2*10
+                 %>
+                <span class="rate rate<%= avrate %>"></span>
+                </div>
+              <% end %>
               </div>
               <% end %>
+              <% if !current_admin_user.nil? %>
+                <%= link_to(edit_tag_path(r)) do %>
+                編集
+                <% end %>
+              <% end %>
+              <div class="tr">
+                <% if r.urls.present? %>
+                  <% r.urls.each do |u| %>
+                    <%= link_to(u.url,:target=>"_blank") do %>
+                      <%= fa_icon "globe" %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+                <% if r.instagram? %>
+                <%= link_to("https://www.instagram.com/#{r.instagram}",:target=>"_blank") do %>
+                  <%= fa_icon "instagram" %>
+                <% end %>
+                <% end %>
+                <% if r.facebook? %>
+                <%= link_to("https://www.facebook.com/#{r.facebook}",:target=>"_blank") do %>
+                  <%= fa_icon "facebook",class:"fb" %>
+                <% end %>
+                <% end %>
+                <% if r.twitter? %>
+                <%= link_to("https://twitter.com/#{r.twitter}",:target=>"_blank") do %>
+                  <%= fa_icon "twitter",class:"tw" %>
+                <% end %>
+                <% end %>
+              </div>
             </div>
         <% end %>
       </div>

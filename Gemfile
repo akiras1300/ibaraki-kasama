@@ -11,10 +11,16 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.1'
 gem 'sanitize'
+gem "font-awesome-rails"
+#gem 'elasticsearch-model'
+#gem 'elasticsearch-rails'
+gem 'geokit-rails'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'sqlite3', group: :development
+gem 'pg', group: :production
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
+gem 'era_ja'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -26,6 +32,7 @@ gem 'gon'
 gem 'google_places'
 gem "gmaps4rails"
 gem "geocoder"
+gem 'whenever', :require => false
 #gem 'jquery-turbolinks'
 gem 'acts-as-taggable-on'
 gem 'impressionist', git: 'https://github.com/charlotte-ruby/impressionist.git'
@@ -57,6 +64,7 @@ gem 'feedbag'
 #gem 'foundation-rails'
 #gem 'foundation-icons-sass-rails'
 gem 'bootstrap', '~> 4.0.0.beta'
+gem 'bootstrap_form'
 #gem 'therubyracer', platforms: :ruby
 #gem 'less-rails'
 #gem 'twitter-bootstrap-rails'

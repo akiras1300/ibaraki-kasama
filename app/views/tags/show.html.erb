@@ -1,15 +1,150 @@
-<%= provide(:title,"#{@tag.name}の記事一覧") %>
-<div class="txc">
-<h3><%= p @tag.name %>の記事一覧</h3>
-<%= "(#{@entry.total_count}件)" %>
+<%= provide(:title,"#{@tag.name}") %>
+<% if !current_admin_user.nil? %>
   <%= number_with_delimiter(@page_views) %>
+  <%= link_to(edit_tag_path(@tag)) do %>
+  編集
+  <% end %>
+  <%= link_to("#{@tag.id}/img") do %>
+  画像
+  <% end %>
+  <%= link_to("#{@tag.id}/url") do %>
+  URL
+  <% end %>
+<% end %>
+<div class="container">
+  <div class="row">
+    <% if @tag.image? %>
+    <div class="col-sm-3 imgf">
+      <%= image_tag @tag.image.mid.url %>
+    </div>
+    <% end %>
+    <div class="col-sm-9">
+  <% if @tag.read? %>
+  <div class="gray small"><%= @tag.read %></div>
+  <% end %>
+  <h3><%= @tag.name %></h3>
+  <% if @tag.rates.present? %>
+    <div class="small">
+      <%
+      avrate=@tag.rates.average(:rate).round(1)
+      avrate2=avrate.round*2/2*10
+       %>
+      <span class="rate rate<%= avrate2 %>"></span>
+      <span class="rating">
+      <span class="average"><%= avrate %></span>
+      </span>
+      <div>
+        <% @tag.rates.each do |r| %>
+          |
+          <span class="lead"><%= r.rate %></span>
+          <span class="gray"><%= r.rcount %>票</span>
+          <%= link_to r.url.title,r.siteurl,target:"_blank" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <div class="stags">
+    <% @tag.tags.each do |tag| %>
+      <%= link_to(tag_path(tag), class: "btn btn-primary btn-sm") do%>
+      <%= p tag.name %>
+      <% end %>
+    <% end %>
+  </div>
+      <div>
+        <%= @tag.body %>
+        <% if @tag.place.present? %>
+          <%= @tag.place.adress %>
+          <%= @tag.place.tel %>
+          <%= @tag.place.open %>
+          <%= @tag.place.parking %>
+        <% end %>
+        <% if @tag.event.present? %>
+          <% if @tag.event.start.present? %>
+            <%= @tag.event.start.strftime("%m/%d")  %>
+            <span class="badge badge-secondary"><%= %w(日 月 火 水 木 金 土)[@tag.event.start.wday] %></span>
+            <% if @tag.event.start !=@tag.event.end %>
+              <%= "～#{@tag.event.end.strftime("%m/%d")}" %>
+              <span class="badge badge-secondary"><%= %w(日 月 火 水 木 金 土)[@tag.event.end.wday] %></span>
+            <% end %>
+          <% end %>
+          <%= @tag.event.etc %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+<div>
+  <%= fa_icon "file-o" %>
+  <%= @tag.taggings_count %>
+  <% if @tag.urls.present? %>
+    <% @tag.urls.each do |u| %>
+      <%= link_to(u.url,:target=>"_blank") do %>
+        <%= fa_icon "globe" %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <% if @tag.instagram? %>
+  <%= link_to("https://www.instagram.com/#{@tag.instagram}",:target=>"_blank") do %>
+    <%= fa_icon "instagram" %>
+  <% end %>
+  <% end %>
+  <% if @tag.facebook? %>
+  <%= link_to("https://www.facebook.com/#{@tag.facebook}",:target=>"_blank") do %>
+    <%= fa_icon "facebook",class:"fb" %>
+  <% end %>
+  <% end %>
+  <% if @tag.twitter? %>
+  <%= link_to("https://twitter.com/#{@tag.twitter}",:target=>"_blank") do %>
+    <%= fa_icon "twitter",class:"tw" %>
+  <% end %>
+  <% end %>
 </div>
+</div>
+<div class="row d-flex justify-content-center mg10">
+    <% @imgs.each do |r| %>
+        <div class="col-sm-3">
+        <%= link_to(img_path(r)) do %>
+          <div class="bbox">
+            <%= image_tag r.image.mid.url if r.image?  %>
+            <%= r.title %>
+            <div class="row imgitem">
+              <div class="col"><%= time_ago_in_words(r.created_at)+"前" %></div>
+            </div>
+          </div>
+        <% end %>
+        <div  class="tags">
+          <% r.tags.each do |tag| %>
+            <%= link_to(tag_path(tag)) do%>
+            <%= p tag.name %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+</div>
+<% if @events.present? %>
+<div class="container">
+<h4>イベント一覧</h4>
+</div>
+<div id="wrapper">
+  <div class="masonry-container">
+    <% @events.each do |r| %>
+      <%= render partial: 'shared/event', locals: { r: r.event ,v:0} %>
+    <% end %>
+  </div>
+</div>
+<% end %>
+<% if @entry.present? %>
+<div class="container">
+<h4>記事一覧</h4>
+</div>
+  <% end %>
   <%= paginate @entry %>
   <div id="wrapper">
-    <div id="masonry-container">
+    <div class="masonry-container">
         <% @entry.each do |r| %>
           <div class="mas-box">
-            <%= link_to("/entries/show/#{r.id}") do %>
+            <%= link_to(entry_path(r)) do %>
               <div class="bbox">
                 <%= image_tag r.image.mid.url if r.image?  %>
                 <%= r.title %>
@@ -21,7 +156,7 @@
             <% end %>
             <div  class="tags">
               <% r.tags.each do |tag| %>
-                <%= link_to("/tags/show/#{tag.id}") do%>
+                <%= link_to(tag_path(tag)) do%>
                 <%= p tag.name %>
                 <% end %>
               <% end %>

@@ -1,0 +1,46 @@
+<div id="wrapper">
+  <div class="txc">
+    <h1 class="h5">
+      facebook一覧
+    </h1>
+    <div  class="stags mg10">
+      <%= link_to("/urls", class: "btn btn-primary btn-sm") do%>
+        <%= p "外部サイト" %>
+      <% end %>
+      <%= link_to("/urls/facebook", class: "btn btn-primary btn-sm") do%>
+        <%= p " facebook" %>
+      <% end %>
+      <%= link_to("/urls/twitter", class: "btn btn-primary btn-sm") do%>
+        <%= p " twitter" %>
+      <% end %>
+      <%= link_to("/urls/instagram", class: "btn btn-primary btn-sm") do%>
+        <%= p " instagram" %>
+      <% end %>
+    </div>
+  </div>
+  <%= paginate @sns %>
+  <div class="masonry-container">
+      <% @sns.each do |r| %>
+        <div class="mas-box">
+          <div class="bbox">
+            <div class="fb-page" data-href="http://www.facebook.com/<%= r.facebook %>" data-tabs="timeline" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false"><blockquote cite="http://www.facebook.com/<%= r.facebook %>" class="fb-xfbml-parse-ignore"><a href="http://www.facebook.com/<%= r.facebook %>"><%= r.name %></a></blockquote></div>
+          </div>
+          <%= link_to("/tags/show/#{r.id}") do %>
+            <%= r.name %>
+          <% end %>
+        </div>
+      <% end %>
+  </div>
+  <%= paginate @sns %>
+</div>
+<div id="fb-root"></div>
+<script>
+$(document).on('ready turbolinks:load', function(){
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.8";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));});
+</script>

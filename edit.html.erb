@@ -1,0 +1,37 @@
+<div class="container">
+  <%= bootstrap_form_for(@tag,url: {action: 'update'}, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-8") do |f| %>
+      <%= f.text_field :name, wrapper: { class: 'row' } %>
+    <%= f.text_field :read, wrapper: { class: 'row' } %>
+    <%= f.text_area :body, wrapper: { class: 'row' } %>
+    <%= f.file_field :image, wrapper: { class: 'row' } %>
+    <%= f.text_field :inyo, wrapper: { class: 'row' } %>
+    <%= f.number_field :oya, wrapper: { class: 'row' } %>
+    <%= f.text_field :tag_list, value: @tag.tag_list.join(","), wrapper: { class: 'row' }  %>
+    <%= f.collection_select :tagtype_id, Tagtype.all, :id, :name, {}, wrapper: { class: 'row' } %>
+    <div>ーーーーーーーイベントーーーーーーー</div>
+    <%= f.fields_for :event, @tag.event do |pf| %>
+          <%= pf.text_field :start,class: 'datepicker', wrapper: { class: 'row' } %>
+          <%= pf.text_field :end,class: 'datepicker', wrapper: { class: 'row' } %>
+          <%= pf.text_field :etc, wrapper: { class: 'row' } %>
+      <% end %>
+      <div>ーーーーーーー場所ーーーーーーー</div>
+      <%= f.fields_for :place, @tag.place do |pf| %>
+            <%= pf.text_field :adress, wrapper: { class: 'row' } %>
+        <% end %>
+    <%= f.submit "完了",{ class: 'btn btn-primary' }%>
+  <% end %>
+  <ui id="alltag">
+    <%= @all_tag_list.join(",")%>
+  </ui>
+</div>
+<script type="text/javascript">
+  $(function() {
+    $(".datepicker").datepicker({dateFormat: 'yy-mm-dd'});
+    alltag = (document.getElementById('alltag')).innerHTML;
+    tagary = alltag.split(',');
+    $('#tag_tag_list').tagit({
+      singleField: true,
+      availableTags: tagary,
+    });
+  });
+</script>

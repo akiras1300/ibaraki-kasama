@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require datepicker-ja
 //= require tether
 //= require tag-it.min
 //= require masonry.pkgd.min

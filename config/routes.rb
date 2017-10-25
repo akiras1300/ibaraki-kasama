@@ -1,26 +1,18 @@
 Rails.application.routes.draw do
-  get 'imgs/index'
-
-  get 'imgs/show/:id' => 'imgs#show'
-
-  get 'tagtypes/index'
-
-  get 'tagtypes/show'
-
-  get 'places/index'
-
-  get 'places/show'
-
-  get 'tags/index'
-
-  get 'tags/show/:id' => 'tags#show'
-
-  get 'urls/index'
-
-  get 'urls/show'
-
   root 'entries#index'
-
+  resources 'events'
+  resources 'imgs'
+  resources 'places'
+  resources 'tags'
+  get 'tags/:id/img'=> 'tags#img'
+  patch "/tags/:id/imgset"=> 'tags#imgset'
+  get 'tags/:id/url'=> 'tags#url'
+  post "/tags/:id/urlset"=> 'tags#urlset'
+  resources 'entries'
+  get 'urls'=> 'urls#index'
+  get 'urls/facebook'
+  get 'urls/twitter'
+  get 'urls/instagram'
   get 'pages/show'
   resources :feeds do
     member do
@@ -28,9 +20,6 @@ Rails.application.routes.draw do
     end
   end
   get 'feeds/show/:id/:page' => 'feeds#show'
-  get 'entries' => 'entries#index'
-  get 'entries/show/:id' => 'entries#show'
-  get 'entries/update' => 'entries#update'
   get 'inquiry' => 'inquiry#index'              # 入力画面
    post 'inquiry/confirm' => 'inquiry#confirm'   # 確認画面
    post 'inquiry/thanks' => 'inquiry#thanks'     # 送信完了画面

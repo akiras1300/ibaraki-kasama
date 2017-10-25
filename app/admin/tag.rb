@@ -1,5 +1,5 @@
 ActiveAdmin.register Tag do
-    permit_params :name,:read,:oya,:body,:tagtype_id,:image,:inyo,:tag_list
+    permit_params :name,:read,:oya,:body,:tagtype_id,:image,:inyo,:tag_list,:facebook,:twitter,:instagram
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
@@ -23,6 +23,9 @@ form(:html => { :multipart => true }) do |f|
      f.input :image
      f.input :inyo
      f.input :tagtype
+     f.input :facebook
+     f.input :twitter
+     f.input :instagram
      f.input :oya
      f.input :image_cache, as: :hidden
      panel 'Markup' do
@@ -53,6 +56,15 @@ form(:html => { :multipart => true }) do |f|
       end
       row 'タイプ' do
         resource.tagtype
+      end
+      row 'facebook' do
+        resource.facebook
+      end
+      row 'twitter' do
+        resource.twitter
+      end
+      row 'instagram' do
+        resource.instagram
       end
       row 'タグ' do
         resource.tag_list

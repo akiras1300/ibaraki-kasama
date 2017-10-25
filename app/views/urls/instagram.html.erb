@@ -1,0 +1,35 @@
+<div id="wrapper">
+  <div class="txc">
+    <h1 class="h5">
+      instagram一覧
+    </h1>
+    <div  class="stags mg10">
+      <%= link_to("/urls", class: "btn btn-primary btn-sm") do%>
+        <%= p "外部サイト" %>
+      <% end %>
+      <%= link_to("/urls/facebook", class: "btn btn-primary btn-sm") do%>
+        <%= p " facebook" %>
+      <% end %>
+      <%= link_to("/urls/twitter", class: "btn btn-primary btn-sm") do%>
+        <%= p " twitter" %>
+      <% end %>
+      <%= link_to("/urls/instagram", class: "btn btn-primary btn-sm") do%>
+        <%= p " instagram" %>
+      <% end %>
+    </div>
+    下記のリンクからインスタグラムサイトに直接飛びます
+  </div>
+  <%= paginate @sns %>
+  <div class="masonry-container">
+      <% @sns.each do |r| %>
+        <div class="mas-box">
+            <%= link_to("https://www.instagram.com/#{r.instagram}",:target=>"_blank") do %>
+            <div class="bbox">
+              <%= r.name %>
+            </div>
+            <% end %>
+        </div>
+      <% end %>
+  </div>
+  <%= paginate @sns %>
+  </div>

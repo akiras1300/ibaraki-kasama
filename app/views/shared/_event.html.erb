@@ -1,0 +1,60 @@
+<div class="mas-box">
+  <%= link_to(tag_path(r.tag)) do %>
+    <div class="bbox">
+      <% if v==1 %>
+      <div class="badge badge-success">あと<%= (r.start-Date.today).to_i %>日</div>
+      <% end %>
+      <% if v==2 %>
+      <div class="badge badge-warning">開催中</div>
+      <% end %>
+      <h4 class="h6">
+        <%= "#{r.tag.name}" %>
+      </h4>
+    <%= image_tag r.tag.image.mid.url if r.tag.image?  %>
+    <% if r.start.present? %>
+      <%= r.start.strftime("%m/%d")  %>
+      <span class="badge badge-secondary"><%= %w(日 月 火 水 木 金 土)[r.start.wday] %></span>
+      <% if r.start !=r.end %>
+        <%= "～#{r.end.strftime("%m/%d")}" %>
+        <span class="badge badge-secondary"><%= %w(日 月 火 水 木 金 土)[r.end.wday] %></span>
+      <% end %>
+    <% end %>
+    <% if r.place.present? %>
+    <div>
+      会場：<%= r.place %>
+    </div>
+    <% end %>
+    <% if r.tag.urls.present? %>
+    <% r.tag.urls.each do |u| %>
+    <a href url="<%= u %>" target="_blank" type="button" class="btn btn-primary btn-lg btn-block">イベントページへ移動</a>
+    <% end %>
+    <% end %>
+    </div>
+  <% end %>
+  <div class="tr">
+    <%= fa_icon "file-o" %>
+    <%= r.tag.taggings_count %>
+    <% if r.tag.urls.present? %>
+      <% r.tag.urls.each do |u| %>
+        <%= link_to(u.url,:target=>"_blank") do %>
+          <%= fa_icon "globe" %>
+        <% end %>
+      <% end %>
+    <% end %>
+    <% if r.tag.instagram? %>
+    <%= link_to("https://www.instagram.com/#{r.tag.instagram}",:target=>"_blank") do %>
+      <%= fa_icon "instagram" %>
+    <% end %>
+    <% end %>
+    <% if r.tag.facebook? %>
+    <%= link_to("https://www.facebook.com/#{r.tag.facebook}",:target=>"_blank") do %>
+      <%= fa_icon "facebook",class:"fb" %>
+    <% end %>
+    <% end %>
+    <% if r.tag.twitter? %>
+    <%= link_to("https://twitter.com/#{r.tag.twitter}",:target=>"_blank") do %>
+      <%= fa_icon "twitter",class:"tw" %>
+    <% end %>
+    <% end %>
+  </div>
+</div>

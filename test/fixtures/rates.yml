@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sitename: MyString
+  rate: 1.5
+  rcount: 1
+  url: MyString
+  tag_id: 1
+
+two:
+  sitename: MyString
+  rate: 1.5
+  rcount: 1
+  url: MyString
+  tag_id: 1

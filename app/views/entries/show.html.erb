@@ -1,10 +1,12 @@
 <div class="container">
   <%= provide(:title, "#{@entry.title}by#{@entry.author}") %>
   <h1><%= @entry.title %></h1>
+  <% if !current_admin_user.nil? %>
   <%= number_with_delimiter(@page_views) %>
+  <% end %>
   <div  class="stags">
     <% @entry.tags.each do |tag| %>
-      <%= link_to("/tags/show/#{tag.id}", class: "btn btn-primary btn-sm") do%>
+      <%= link_to(tag_path(tag), class: "btn btn-primary btn-sm") do%>
       <%= p tag.name %>
       <% end %>
     <% end %>
@@ -23,10 +25,10 @@
     <span type="button" class="btn btn-primary btn-lg btn-block mg10">掲載元で続きを読む</span>
     <% end %>
 </div>
-<div id="masonry-container">
+<div class="masonry-container">
     <% @entries.each do |r| %>
       <div class="mas-box">
-        <%= link_to("/entries/show/#{r.id}") do %>
+        <%= link_to(entry_path(r)) do %>
           <div class="bbox">
             <%= image_tag r.image.mid.url if r.image?  %>
             <%= r.title %>
@@ -38,7 +40,7 @@
         <% end %>
         <div  class="tags">
           <% r.tags.each do |tag| %>
-            <%= link_to("/tags/show/#{tag.id}") do%>
+            <%= link_to(tag_path(tag)) do%>
             <%= p tag.name %>
             <% end %>
           <% end %>

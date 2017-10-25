@@ -1,2 +1,43 @@
-<h1>Urls#index</h1>
-<p>Find me in app/views/urls/index.html.erb</p>
+
+    <div id="wrapper">
+      <div class="txc">
+        <h1 class="h5">
+          外部サイト一覧
+        </h1>
+      <div  class="stags mg10">
+        <%= link_to("/urls", class: "btn btn-primary btn-sm") do%>
+          <%= p "外部サイト" %>
+        <% end %>
+        <%= link_to("/urls/facebook", class: "btn btn-primary btn-sm") do%>
+          <%= p " facebook" %>
+        <% end %>
+        <%= link_to("/urls/twitter", class: "btn btn-primary btn-sm") do%>
+          <%= p " twitter" %>
+        <% end %>
+        <%= link_to("/urls/instagram", class: "btn btn-primary btn-sm") do%>
+          <%= p " instagram" %>
+        <% end %>
+      </div>
+            </div>
+      <%= paginate @url %>
+      <div class="masonry-container">
+          <% @url.each do |r| %>
+            <div class="mas-box">
+              <%= link_to("#{r.url}",:target=>"_blank") do%>
+                <div class="bbox">
+                  <%= image_tag r.image.mid.url if r.image?  %>
+                  <%= r.title %>
+                </div>
+              <% end %>
+              <%  if r.tag.present? %>
+              <div  class="tag">
+                  <%= link_to("/tags/show/#{r.tag_id}") do%>
+                  <% p r.tag.name %>
+                  <% end %>
+              </div>
+              <% end %>
+            </div>
+          <% end %>
+      </div>
+      <%= paginate @url %>
+    </div>

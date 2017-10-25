@@ -1,5 +1,5 @@
 ActiveAdmin.register Place do
-  permit_params :name, :lat,:lng
+  permit_params :name, :lat,:lng,:tag_id,:tel,:parking,:ptype,:adress,:open
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #

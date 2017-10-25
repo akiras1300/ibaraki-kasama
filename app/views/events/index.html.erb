@@ -1,2 +1,24 @@
-<h1>Events#index</h1>
-<p>Find me in app/views/events/index.html.erb</p>
+    <div id="wrapper">
+      <% if @nevents.present? %>
+      <h4 class="txc">開催中のイベント</h4>
+      <div class="masonry-container">
+        <% @nevents.each do |r| %>
+          <%= render partial: 'shared/event', locals: { r: r ,v:2} %>
+        <% end %>
+      </div>
+      <% end %>
+      <% if @fevents.present? %>
+      <h4 class="txc">開催予定のイベント</h4>
+      <div class="masonry-container">
+        <% @fevents.each do |r| %>
+          <%= render partial: 'shared/event', locals: { r: r ,v:1} %>
+        <% end %>
+      </div>
+      <% end %>
+      <h4 class="txc">終了したイベント</h4>
+      <div class="masonry-container">
+        <% @eevents.each do |r| %>
+            <%= render partial: 'shared/event', locals: { r: r ,v:0} %>
+        <% end %>
+      </div>
+    </div>

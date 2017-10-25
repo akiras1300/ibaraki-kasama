@@ -56,6 +56,107 @@ a:hover{
 .eimg{
   max-width:100%;
 }
+.tr{
+  text-align: right;
+  margin: 0 10px;
+}
 .clear{
   clear: both;
+}
+.fb{
+color:#315096;
+}
+.tw{
+color:#55acee;
+}
+.rate {
+    display: inline-block;
+    font-size: 14px;
+    height: 14px;
+    position: relative;
+    width: 70px;
+}
+.rating .average {
+    font-size: 18px;
+}
+.rate::before, .rate::after {
+    content: "★★★★★";
+    display: inline-block;
+    height: 14px;
+    left: 0;
+    line-height: 14px;
+    position: absolute;
+    top: 0;
+}
+.rate::before {
+    color: #ddd;
+}
+.gray {
+    color: #888888;
+}
+.rate::after {
+    color: #ffa500;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.rate00::after {
+    width: 0;
+}
+.rate05::after {
+    width: 7px;
+}
+.rate10::after {
+    width: 14px;
+}
+.rate15::after {
+    width: 21px;
+}
+.rate20::after {
+    width: 28px;
+}
+.rate25::after {
+    width: 35px;
+}
+.rate30::after {
+    width: 42px;
+}
+.rate35::after {
+    width: 49px;
+}
+.rate40::after {
+    width: 56px;
+}
+.rate45::after {
+    width: 63px;
+}
+.rate50::after {
+    width: 70px;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 80px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 80px;
+  background-color: #f5f5f5;
+}
+.container .text-muted {
+  margin: 20px 0;
+}
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.imgf img{
+  width:100%;
 }

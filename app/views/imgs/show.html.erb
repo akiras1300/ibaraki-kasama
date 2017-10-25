@@ -1,10 +1,15 @@
 <div class="container">
   <%= provide(:title, "#{@img.title}") %>
   <h1><%= @img.title %></h1>
-  <%= number_with_delimiter(@page_views) %>
+  <% if !current_admin_user.nil? %>
+    <%= number_with_delimiter(@page_views) %>
+    <%= link_to(edit_img_path(@img)) do %>
+    編集
+    <% end %>
+  <% end %>
   <div  class="stags">
     <% @img.tags.each do |tag| %>
-      <%= link_to("/tags/show/#{tag.id}", class: "btn btn-primary btn-sm") do%>
+      <%= link_to(tag_path(tag), class: "btn btn-primary btn-sm") do%>
       <%= p tag.name %>
       <% end %>
     <% end %>
@@ -18,7 +23,7 @@
 <div id="masonry-container">
     <% @imgs.each do |r| %>
       <div class="mas-box">
-        <%= link_to("/imgs/show/#{r.id}") do %>
+        <%= link_to(img_path(r)) do %>
           <div class="bbox">
             <%= image_tag r.image.mid.url if r.image?  %>
             <%= r.title %>
@@ -28,7 +33,7 @@
         <% end %>
         <div  class="tags">
           <% r.tags.each do |tag| %>
-            <%= link_to("/tags/show/#{tag.id}") do%>
+            <%= link_to(tag_path(tag)) do%>
             <%= p tag.name %>
             <% end %>
           <% end %>

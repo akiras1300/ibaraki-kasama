@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170916111432) do
+ActiveRecord::Schema.define(version: 20171014132844) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -57,11 +57,15 @@ ActiveRecord::Schema.define(version: 20170916111432) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.datetime "start"
-    t.datetime "end"
+    t.date "start"
+    t.date "end"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "tag_id"
+    t.string "etc"
+    t.text "body"
+    t.string "place"
+    t.string "kibo"
     t.index ["tag_id"], name: "index_events_on_tag_id"
   end
 
@@ -73,16 +77,6 @@ ActiveRecord::Schema.define(version: 20170916111432) do
     t.datetime "updated_at", null: false
     t.integer "url_id"
     t.index ["url_id"], name: "index_feeds_on_url_id"
-  end
-
-  create_table "follows", force: :cascade do |t|
-    t.integer "from_tag_id", null: false
-    t.integer "to_tag_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["from_tag_id", "to_tag_id"], name: "index_follows_on_from_tag_id_and_to_tag_id", unique: true
-    t.index ["from_tag_id"], name: "index_follows_on_from_tag_id"
-    t.index ["to_tag_id"], name: "index_follows_on_to_tag_id"
   end
 
   create_table "imgs", force: :cascade do |t|
@@ -136,6 +130,16 @@ ActiveRecord::Schema.define(version: 20170916111432) do
     t.index ["tag_id"], name: "index_places_on_tag_id"
   end
 
+  create_table "rates", force: :cascade do |t|
+    t.string "url_id"
+    t.float "rate"
+    t.integer "rcount"
+    t.string "siteurl"
+    t.integer "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "taggings", force: :cascade do |t|
     t.integer "tag_id"
     t.string "taggable_type"
@@ -158,17 +162,16 @@ ActiveRecord::Schema.define(version: 20170916111432) do
   create_table "tags", force: :cascade do |t|
     t.string "name"
     t.integer "taggings_count", default: 0
-    t.integer "event_id"
     t.string "read"
     t.text "body"
     t.integer "oya"
-    t.integer "place_id"
     t.integer "tagtype_id"
     t.text "image"
     t.string "inyo"
-    t.index ["event_id"], name: "index_tags_on_event_id"
+    t.string "facebook"
+    t.string "twitter"
+    t.string "instagram"
     t.index ["name"], name: "index_tags_on_name", unique: true
-    t.index ["place_id"], name: "index_tags_on_place_id"
     t.index ["tagtype_id"], name: "index_tags_on_tagtype_id"
   end
 
@@ -183,6 +186,9 @@ ActiveRecord::Schema.define(version: 20170916111432) do
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "tag_id"
+    t.integer "jyun"
+    t.text "image"
   end
 
 end

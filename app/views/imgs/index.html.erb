@@ -1,8 +1,11 @@
+<div class="txc">
+<h1 class="h2">画像一覧</h1>
+</div>
 <%= paginate @img %>
-<div id="masonry-container">
+<div class="masonry-container">
     <% @img.each do |r| %>
       <div class="mas-box">
-        <%= link_to("/imgs/show/#{r.id}") do %>
+        <%= link_to(img_path(r)) do %>
           <div class="bbox">
             <%= image_tag r.image.mid.url if r.image?  %>
             <%= r.title %>
@@ -13,7 +16,7 @@
         <% end %>
         <div  class="tags">
           <% r.tags.each do |tag| %>
-            <%= link_to("/tags/show/#{tag.id}") do%>
+            <%= link_to(tag_path(tag)) do%>
             <%= p tag.name %>
             <% end %>
           <% end %>
